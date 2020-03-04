@@ -13,11 +13,10 @@ export default function manageQuote(state = [], action) {
     case 'UPVOTE_QUOTE':
       index = state.findIndex(quote => quote.id === action.quoteId);
       quote = state[index];
-      return [
-        ...state.slice(0, index),
-        {...quote, votes: quote.votes += 1 },
-        ...state.slice(index + 1)
-      ];
+      let newState = state;
+      newState[index] = quote.votes += 1
+      state = newState;
+      return state;
       
     case 'DOWNVOTE_QUOTE':
       index = state.findIndex(quote => quote.id === action.quoteId);
