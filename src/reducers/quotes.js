@@ -5,14 +5,10 @@ export default function manageQuote(state = [], action) {
   switch (action.type) {
 
     case 'ADD_QUOTE':
-      return { quotes: state.concat(action.quote) }
+      return [...state,action.quote]
 
     case 'REMOVE_QUOTE':
-      index = state.findIndex(quote=> quote.id === action.id)
-      return {
-        ...state,
-        quotes: [...state.slice(0, index), ...state.slice(index + 1)]
-      };
+      return state.filter(quote => quote.id !== action.quoteId);
 
     case 'UPVOTE_QUOTE':
       index = state.findIndex(quote => quote.id === action.quoteId);
